@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_28_081351) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_30_050326) do
+  create_table "constituencies", force: :cascade do |t|
+    t.string "name"
+    t.integer "county_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["county_id"], name: "index_constituencies_on_county_id"
+  end
+
   create_table "counties", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -32,4 +40,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_081351) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "constituencies", "counties"
 end
